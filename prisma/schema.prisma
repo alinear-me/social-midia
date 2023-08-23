@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// deve ter um ID, nome, email, data de nascimento, biografia e data de criação.
+model User {
+  id    Int     @default(autoincrement()) @id
+  name  String?
+  email String  @unique
+  birth String
+  biography String?
+  date DateTime
+  posts Post[]
+}
+
+// Cada post deve ter um ID, conteúdo, um usuário associado e data de criação.
+model Post {
+  id        Int      @default(autoincrement()) @id
+  content   String?
+  published Boolean? @default(false)
+  author    User?    @relation(fields: [authorId], references: [id])
+  authorId  Int?
+  date DateTime
+}
