@@ -9,11 +9,13 @@ datasource db {
 
 // deve ter um ID, nome, email, data de nascimento, biografia e data de criação.
 model User {
-  id    Int     @default(autoincrement()) @id
-  name  String?
-  email String  @unique
-  birth String
-  biography String?
+  id    Int    @id @default(autoincrement()) 
+  name  String 
+  password String 
+  username String @unique
+  email String  @unique 
+  birth DateTime @default(dbgenerated())
+  biography String
   date DateTime
   posts Post[]
 }

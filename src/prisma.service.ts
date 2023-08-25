@@ -5,15 +5,16 @@ import { PrismaClient } from '@prisma/client'
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
     posts: any;
+    users: any;
 
     async onModuleInit() {
         await this.$connect();
     }
 
-    async enableShotdownHooks(app:INestApplication) {
-        this.$on('beforeExite', async () => {
+    async enableShotdownHooks(app: INestApplication) {
+         async () => {
             await app.close()
-        })
+        }
     }
     
 }
